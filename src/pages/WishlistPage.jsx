@@ -142,7 +142,7 @@ const WishlistPage = () => {
                       <Button
                         as={Link}
                         to={`/properties/${p.id}`}
-                        className="wl-btn-view flex-grow-1"
+                        className="wl-btn-view grow"
                       >
                         View Details
                       </Button>

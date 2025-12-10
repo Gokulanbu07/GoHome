@@ -8,6 +8,7 @@ import {
   getConversationByPropertyId,
   addMessage,
 } from "../services/messageService";
+import '../styles/ChatPage.css';
 
 const ACCENT = "#D4AF37";
 const DARK_BG = "#050508";
@@ -70,78 +71,6 @@ const ChatPage = () => {
 
   return (
     <div style={{ backgroundColor: DARK_BG, minHeight: "100vh" }}>
-      <style jsx="true">{`
-        .chat-wrapper {
-          padding: 3rem 0 4rem;
-          background: radial-gradient(
-            circle at top left,
-            rgba(212, 175, 55, 0.15),
-            ${DARK_BG}
-          );
-          color: ${TEXT_LIGHT};
-        }
-
-        .chat-property-card {
-          background: ${CARD_DARK};
-          border-radius: 16px;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
-        }
-
-        .chat-main-card {
-          background: ${CARD_DARK};
-          border-radius: 16px;
-          border: 1px solid #22222f;
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
-          display: flex;
-          flex-direction: column;
-          height: 70vh;
-        }
-
-        .chat-messages {
-          flex: 1;
-          overflow-y: auto;
-          padding: 1rem 1.4rem;
-        }
-
-        .chat-input {
-          border-top: 1px solid #22222f;
-          padding: 0.9rem 1.4rem;
-          background: #07070c;
-          border-radius: 0 0 16px 16px;
-        }
-
-        .msg-bubble {
-          max-width: 80%;
-          padding: 0.55rem 0.8rem;
-          border-radius: 14px;
-          margin-bottom: 0.35rem;
-          font-size: 0.9rem;
-        }
-
-        .msg-user {
-          background: ${ACCENT};
-          color: #050508;
-          margin-left: auto;
-          border-bottom-right-radius: 4px;
-        }
-
-        .msg-meta {
-          font-size: 0.7rem;
-          color: #b5b5b5;
-          text-align: right;
-          margin-top: 0.1rem;
-        }
-
-        .quick-btn {
-          background: rgba(212, 175, 55, 0.12);
-          border-color: rgba(212, 175, 55, 0.3);
-          border-radius: 999px;
-          font-size: 0.75rem;
-          color: #f5f5f5;
-        }
-      `}</style>
-
       <Container className="chat-wrapper">
         <Row className="g-4">
           {/* Left: property info */}
@@ -225,7 +154,10 @@ const ChatPage = () => {
                       value={messageText}
                       onChange={(e) => setMessageText(e.target.value)}
                     />
-                    <Button type="submit" style={{ background: ACCENT, borderColor: ACCENT }}>
+                    <Button
+                      type="submit"
+                      style={{ background: ACCENT, borderColor: ACCENT }}
+                    >
                       <i className="fas fa-paper-plane" />
                     </Button>
                   </div>

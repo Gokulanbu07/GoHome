@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/common/UserNavbar";
-
-const ACCENT_COLOR = "#D4AF37";
-const BACKGROUND_DARK = "#050508";
+import "../styles/AddPropertyPage.css";
 
 const AddPropertyPage = () => {
   const navigate = useNavigate();
@@ -26,72 +24,13 @@ const AddPropertyPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log("Property Submitting:", formData);
-
-    // After save → redirect
     navigate("/my-properties");
   };
 
   return (
-    <div style={{ backgroundColor: BACKGROUND_DARK, minHeight: "100vh" }}>
+    <div className="ap-page">
       <UserNavbar />
-
-      <style jsx="true">{`
-        .ap-wrapper {
-          padding: 3.5rem 0;
-          background: radial-gradient(
-              circle at top left,
-              rgba(212, 175, 55, 0.1),
-              ${BACKGROUND_DARK}
-          );
-          color: white;
-        }
-
-        .ap-card {
-          background: #0d0d12;
-          border-radius: 18px;
-          padding: 2.2rem;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          box-shadow: 0 22px 50px rgba(0, 0, 0, 0.8);
-        }
-
-        .ap-title {
-          font-size: 2rem;
-          font-weight: bold;
-          color: ${ACCENT_COLOR};
-        }
-
-        .ap-label {
-          font-weight: 600;
-          font-size: 0.9rem;
-        }
-
-        .ap-input {
-          background: #1b1b22;
-          border: 1px solid #2c2c38;
-          color: white;
-          border-radius: 10px;
-        }
-
-        .ap-input:focus {
-          border-color: ${ACCENT_COLOR};
-          box-shadow: 0 0 6px ${ACCENT_COLOR};
-        }
-
-        .ap-btn {
-          background-color: ${ACCENT_COLOR};
-          border-color: ${ACCENT_COLOR};
-          font-weight: 600;
-          padding: 0.8rem;
-          border-radius: 10px;
-          color: #050508;
-        }
-
-        .ap-btn:hover {
-          background-color: #c59a24;
-        }
-      `}</style>
 
       <Container className="ap-wrapper">
         <Row className="justify-content-center">
@@ -194,14 +133,16 @@ const AddPropertyPage = () => {
                   />
                 </Form.Group>
 
-                {/* OPTIONAL FILE UPLOAD (UI ONLY) */}
                 <Form.Group className="mb-4">
                   <Form.Label className="ap-label">Upload Property Image</Form.Label>
                   <Form.Control
                     type="file"
                     className="ap-input"
                     onChange={(e) =>
-                      setFormData({ ...formData, image: e.target.files[0]?.name })
+                      setFormData({
+                        ...formData,
+                        image: e.target.files[0]?.name,
+                      })
                     }
                   />
                 </Form.Group>

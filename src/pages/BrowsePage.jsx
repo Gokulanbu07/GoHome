@@ -12,6 +12,7 @@ import {
     Pagination,
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import '../styles/BrowsePage.css'
 
 const BACKGROUND_DARK_COLOR = '#050508';
 const ACCENT_COLOR = '#D4AF37';
@@ -107,7 +108,6 @@ const BrowsePage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = 6; // properties per page
 
-    // reset to page 1 whenever filters/search change
     useEffect(() => {
         setCurrentPage(1);
     }, [activeCategory, searchText, sortOrder]);
@@ -115,7 +115,6 @@ const BrowsePage = () => {
     const filteredProperties = useMemo(() => {
         let list = [...ALL_PROPERTIES];
 
-        // Filter by category / type
         if (activeCategory !== 'All') {
             list = list.filter((p) => {
                 if (activeCategory === 'Rent') return p.type === 'Rent';
@@ -124,7 +123,6 @@ const BrowsePage = () => {
             });
         }
 
-        // Filter by search text (title + city)
         if (searchText.trim() !== '') {
             const q = searchText.toLowerCase();
             list = list.filter(
@@ -134,7 +132,6 @@ const BrowsePage = () => {
             );
         }
 
-        // Sort by price
         if (sortOrder === 'low-high') {
             list.sort((a, b) => a.price - b.price);
         } else if (sortOrder === 'high-low') {
@@ -146,7 +143,6 @@ const BrowsePage = () => {
 
     const totalPages = Math.max(1, Math.ceil(filteredProperties.length / pageSize));
 
-    // clamp current page if filters reduced list
     useEffect(() => {
         if (currentPage > totalPages) {
             setCurrentPage(1);
@@ -167,194 +163,6 @@ const BrowsePage = () => {
             className="browse-page"
             style={{ backgroundColor: BACKGROUND_DARK_COLOR, minHeight: '100vh' }}
         >
-            <style jsx="true">{`
-                .browse-wrapper {
-                    padding: 3.5rem 0 4rem;
-                    background: radial-gradient(
-                            circle at top left,
-                            rgba(212, 175, 55, 0.16),
-                            #050508
-                        );
-                    color: ${TEXT_LIGHT};
-                }
-
-                .browse-title {
-                    font-size: 2rem;
-                    font-weight: 700;
-                    margin-bottom: 0.4rem;
-                }
-
-                .browse-sub {
-                    font-size: 0.95rem;
-                    color: #c2c2c2;
-                    max-width: 560px;
-                }
-
-                .browse-filter-card {
-                    background: ${CARD_DARK};
-                    border-radius: 18px;
-                    border: 1px solid rgba(212, 175, 55, 0.4);
-                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-                    padding: 1.4rem 1.6rem;
-                    margin-top: 2rem;
-                    margin-bottom: 2rem;
-                }
-
-                .browse-tabs {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.5rem;
-                    margin-bottom: 1rem;
-                }
-
-                .browse-tab-btn {
-                    padding: 0.45rem 0.95rem;
-                    border-radius: 999px;
-                    border: 1px solid #2a2a35;
-                    background: #050508;
-                    color: #e0e0e0;
-                    font-size: 0.85rem;
-                    cursor: pointer;
-                    transition: all 0.2s ease;
-                }
-
-                .browse-tab-btn.active {
-                    background: ${ACCENT_COLOR};
-                    border-color: ${ACCENT_COLOR};
-                    color: #050508;
-                    font-weight: 600;
-                }
-
-                .browse-tab-btn:hover {
-                    border-color: rgba(212, 175, 55, 0.6);
-                }
-
-                .browse-search-input {
-                    background: #0f1017;
-                    border: 1px solid #2a2a35;
-                    border-radius: 10px;
-                    padding: 0.6rem 0.85rem;
-                    color: ${TEXT_LIGHT};
-                    font-size: 0.9rem;
-                }
-
-                .browse-search-input::placeholder {
-                    color: #8f8f9c;
-                }
-
-                .browse-search-input:focus {
-                    outline: none;
-                    border-color: ${ACCENT_COLOR};
-                    box-shadow: 0 0 0 1px ${ACCENT_COLOR};
-                }
-
-                .browse-sort-select {
-                    background: #0f1017;
-                    border-radius: 10px;
-                    border: 1px solid #2a2a35;
-                    color: ${TEXT_LIGHT};
-                    font-size: 0.9rem;
-                }
-
-                .browse-sort-select:focus {
-                    outline: none;
-                    border-color: ${ACCENT_COLOR};
-                    box-shadow: 0 0 0 1px ${ACCENT_COLOR};
-                }
-
-                .browse-property-card {
-                    background: ${CARD_DARK};
-                    border-radius: 16px;
-                    border: 1px solid #20202a;
-                    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-                    overflow: hidden;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    transition: transform 0.2s ease, box-shadow 0.2s ease,
-                        border-color 0.2s ease;
-                }
-
-                .browse-property-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 22px 50px rgba(0, 0, 0, 1);
-                    border-color: rgba(212, 175, 55, 0.5);
-                }
-
-                .browse-property-card img {
-                    height: 200px;
-                    object-fit: cover;
-                }
-
-                .browse-card-title {
-                    font-size: 1.05rem;
-                    font-weight: 600;
-                    color: ${TEXT_LIGHT};
-                }
-
-                .browse-card-city {
-                    font-size: 0.9rem;
-                    color: #c2c2c2;
-                }
-
-                .browse-price {
-                    font-size: 1.1rem;
-                    font-weight: 700;
-                    color: ${ACCENT_COLOR};
-                }
-
-                .browse-meta {
-                    font-size: 0.85rem;
-                    color: #c2c2c2;
-                }
-
-                .browse-tag {
-                    font-size: 0.75rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.12em;
-                    color: #b4b4b4;
-                }
-
-                .browse-btn-details {
-                    background-color: ${ACCENT_COLOR};
-                    border-color: ${ACCENT_COLOR};
-                    color: #050508;
-                    border-radius: 999px;
-                    font-size: 0.9rem;
-                    font-weight: 600;
-                }
-
-                .browse-btn-details:hover {
-                    background-color: #c59a24;
-                    border-color: #c59a24;
-                    color: #050508;
-                }
-
-                .browse-empty {
-                    text-align: center;
-                    color: #c2c2c2;
-                    padding: 2rem 0;
-                }
-
-                .browse-pagination-wrapper {
-                    margin-top: 2rem;
-                }
-                .browse-pagination-wrapper .page-link {
-                    background-color: #0f1017;
-                    border-color: #2a2a35;
-                    color: ${TEXT_LIGHT};
-                }
-                .browse-pagination-wrapper .page-item.active .page-link {
-                    background-color: ${ACCENT_COLOR};
-                    border-color: ${ACCENT_COLOR};
-                    color: #050508;
-                    font-weight: 600;
-                }
-                .browse-pagination-wrapper .page-link:hover {
-                    border-color: ${ACCENT_COLOR};
-                }
-            `}</style>
-
             <div className="browse-wrapper">
                 <Container>
                     {/* Header */}
@@ -506,24 +314,18 @@ const BrowsePage = () => {
                                         <Pagination.Prev
                                             disabled={currentPage === 1}
                                             onClick={() =>
-                                                setCurrentPage((p) =>
-                                                    Math.max(1, p - 1)
-                                                )
+                                                setCurrentPage((p) => Math.max(1, p - 1))
                                             }
                                         />
-                                        {Array.from({ length: totalPages }).map(
-                                            (_, index) => (
-                                                <Pagination.Item
-                                                    key={index + 1}
-                                                    active={currentPage === index + 1}
-                                                    onClick={() =>
-                                                        setCurrentPage(index + 1)
-                                                    }
-                                                >
-                                                    {index + 1}
-                                                </Pagination.Item>
-                                            )
-                                        )}
+                                        {Array.from({ length: totalPages }).map((_, index) => (
+                                            <Pagination.Item
+                                                key={index + 1}
+                                                active={currentPage === index + 1}
+                                                onClick={() => setCurrentPage(index + 1)}
+                                            >
+                                                {index + 1}
+                                            </Pagination.Item>
+                                        ))}
                                         <Pagination.Next
                                             disabled={currentPage === totalPages}
                                             onClick={() =>
@@ -544,4 +346,3 @@ const BrowsePage = () => {
 };
 
 export default BrowsePage;
- 
