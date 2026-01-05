@@ -1,0 +1,67 @@
+.ap-page {
+  background-color: #050508;
+  min-height: 100vh;
+}
+
+/* Wrapper */
+.ap-wrapper {
+  padding: 3.5rem 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(212, 175, 55, 0.1),
+    #050508
+  );
+  color: white;
+}
+
+/* Card */
+.ap-card {
+  background: #0d0d12;
+  border-radius: 18px;
+  padding: 2.2rem;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* Title */
+.ap-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d4af37;
+}
+
+/* Labels */
+.ap-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Inputs */
+.ap-input {
+  background: #1b1b22;
+  border: 1px solid #2c2c38;
+  color: white;
+  border-radius: 10px;
+}
+
+.ap-input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 6px #d4af37;
+  background: #1b1b22;
+  color: white;
+}
+
+/* Button */
+.ap-btn {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  font-weight: 600;
+  padding: 0.8rem;
+  border-radius: 10px;
+  color: #050508;
+}
+
+.ap-btn:hover {
+  background-color: #c59a24;
+  border-color: #c59a24;
+}

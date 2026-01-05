@@ -1,0 +1,105 @@
+.register-container {
+  min-height: calc(100vh - 80px);
+  background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15), #050508);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lock card + body to dark theme */
+.card.register-card,
+.card.register-card .card-body {
+  background: #0b0b10;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #F5F5F5;
+}
+
+.register-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: radial-gradient(circle, #D4AF37, transparent 60%);
+  color: #050508;
+}
+
+.register-title {
+  color: #F5F5F5;
+}
+
+.register-subtitle {
+  color: #c2c2c2;
+}
+
+.register-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b4b4b4;
+  margin-bottom: 0.3rem;
+}
+
+/* beat .form-control defaults */
+.form-control.register-input {
+  background: #0f1017;
+  border: 1px solid #2a2a35;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  color: #F5F5F5;
+  font-size: 0.9rem;
+}
+
+.register-input::placeholder {
+  color: #8f8f9c;
+}
+
+.register-input:focus {
+  outline: none;
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 1px #D4AF37;
+}
+
+/* btn-primary-custom = bootstrap class from variant="primary-custom" */
+.btn-primary-custom {
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+  transition: all 0.3s ease;
+  color: #050508;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btn-primary-custom:hover {
+  background-color: #c59a24;
+  border-color: #c59a24;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.5);
+  color: #050508;
+}
+
+.btn-primary-custom:focus {
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.35);
+}
+
+.register-footer-border {
+  border-top: 1px solid #2a2a35;
+}
+
+.register-footer-text {
+  color: #b4b4b4;
+}
+
+.register-footer-link {
+  color: #D4AF37;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register-footer-link:hover {
+  text-decoration: underline;
+}
