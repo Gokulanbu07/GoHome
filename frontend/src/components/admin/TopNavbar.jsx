@@ -1,6 +1,8 @@
 // src/components/admin/PropertyTable.jsx
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext'; 
+import { Link, useNavigate } from 'react-router-dom';
 
 const PropertyTable = ({ properties, onDelete, onEdit }) => {
     // Utility to get status badge color

@@ -1,11 +1,13 @@
 // src/components/common/UserNavbar.jsx
 import React from 'react';
 import { Container, Nav, Navbar, Button } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext.jsx';
+import { Link, useLocation} from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+
 
 const UserNavbar = ({ primaryColor = '#D4AF37', lightBg = false }) => {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { user, logout } = useAuth();
+const isAuthenticated = !!user;
   const location = useLocation();
 
   const NAV_BG_DARK = '#050508';
@@ -178,7 +180,7 @@ const UserNavbar = ({ primaryColor = '#D4AF37', lightBg = false }) => {
                       letterSpacing: 0,
                     }}
                   >
-                    {user?.full_name || 'Profile'}
+                    {user?.name || 'Profile'}
                   </span>
                 </Nav.Link>
 

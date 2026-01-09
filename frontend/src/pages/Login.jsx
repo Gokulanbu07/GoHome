@@ -22,34 +22,33 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-        if (!email || !password) {
-            setError('Please enter both email and password.');
-            setLoading(false);
-            return;
-        }
+    try {
+        const result = await login(email, password);
+        
+        // Log this to your browser console to verify it's working
+        console.log("Login Result:", result);
 
-        try {
-            const response = await login(email, password); 
-            
-            if (response.success) {
-const redirectPath = response.user.role === 'admin' 
-    ? '/admin/dashboard' 
-    : '/user/dashboard';
-                navigate(redirectPath, { replace: true });
+        if (result.success) {
+            // Check the role exactly as it appears in your image_e569a6.jpg
+            if (result.user.role === 'admin') {
+                navigate('/admin/dashboard', { replace: true });
             } else {
-                setError(response.message || 'Login failed. Check your credentials.');
+                navigate('/', { replace: true });
             }
-        } catch (err) {
-            console.error("Login Error:", err);
-            setError('An unexpected error occurred. Please try again.');
-        } finally {
-            setLoading(false);
+        } else {
+            setError(result.message || 'Invalid credentials');
         }
-    };
+    } catch (err) {
+        setError('An error occurred. Please check your connection.');
+        console.error(err);
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: BACKGROUND_DARK_COLOR }}>

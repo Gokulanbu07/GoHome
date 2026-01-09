@@ -15,6 +15,7 @@ import MyMessagesPage from './pages/MyMessagesPage';
 import ChatPage from './pages/ChatPage';
 
 
+
 // --- PROPERTY MANAGEMENT PAGES (User/Owner Side) ---
 import MyPropertiesPage from './pages/MyPropertiesPage';
 import AddPropertyPage from './pages/AddPropertyPage';
@@ -25,7 +26,7 @@ import MyVisitsPage from './pages/MyVisitsPage';
 
 
 // --- LAYOUTS ---
-import AdminLayout from './layouts/AdminLayout';
+import AdminLayout from '../src/layouts/AdminLayout';
 import UserLayout from './layouts/UserLayout';
 
 // --- ADMIN PAGES ---
@@ -85,9 +86,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+
         {/* Public Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+
 
         {/* USER AREA (with UserLayout) */}
         <Route path="/" element={<UserLayout />}>
@@ -104,7 +109,13 @@ function App() {
       <UpgradeOwnerPage />
     </ProtectedRoute>
   }
+
 />
+
+          {/* ADMIN AREA */}
+<Route path="/admin" element={<ProtectedRoute role="admin"><AdminLayout /></ProtectedRoute>}>
+      <Route path="dashboard" element={<Dashboard />} />
+    </Route>
 
 
 
